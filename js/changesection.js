@@ -15,6 +15,10 @@ function changesection(id) {
     const activeBtn = document.querySelector(`[data-target="${id}"]`);
     activeBtn?.classList.remove('text-white');
     activeBtn?.classList.add('text-blue-600');
+
+    getUserCount();
+    getOrdersCount();
+    getProductsCount();
 }
 
 hdbtns.forEach(btn => {
