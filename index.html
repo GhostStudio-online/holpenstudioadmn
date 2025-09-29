@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://telegram.org/js/telegram-web-app.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css">
+</head>
+<body class="bg-zinc-950">
+    <header class="w-full fixed bottom-0 left-0 bg-zinc-900 rounded-t-lg z-150">
+        <div class="px-4 py-6">
+            <div class="grid grid-cols-3" id="hd-sections"></div>
+        </div>
+    </header>
+
+    <main class="h-screen p-4">
+        <section class="h-full hidden" id="statistic">
+            <div class="flex flex-col gap-4 pb-20">
+                <!-- Панель профиля -->
+                <div class="grid grid-cols-[64px_auto] gap-4 items-center bg-zinc-800 p-4 rounded-xl">
+                    <img id="user-photo" src="" alt="avatar" class="w-16 h-16 rounded-full border border-zinc-700">
+                    <div class="flex flex-col">
+                        <h3 id="user-name" class="text-white font-bold text-xl"></h3>
+                        <p id="user-username" class="text-gray-400 text-sm"></p>
+                    </div>
+                </div>
+
+                <!-- Дополнительные блоки -->
+                <div class="bg-zinc-800 p-4 rounded-xl flex flex-col items-center">
+                    <h4 class="text-white font-semibold text-xl">Заказы:</h4>
+                    <div class="grid grid-cols-2 gap-4 mt-2" id="orders"></div>
+                </div>
+            </div>
+        </section>
+        <section class="h-full hidden" id="products">
+            <div class="grid grid-cols-2 lg:grid-cols-4 gap-4 pb-20" id="productscont"></div>
+        </section>
+        <section class="h-full hidden" id="create">
+            <div class="flex flex-col items-center justify-center gap-4">
+                <div class="w-full flex flex-col items-center justify-center gap-2">
+                    <h3 class="text-lg text-gray-200 font-bold tracking-tight">Введите ссылку на иконку:</h3>
+                    <input type="text" name="icon" id="icon" class="w-[90%] py-2 border border-gray-400 rounded-xl text-base text-gray-400 font-regular text-center" placeholder="Ссылка на иконку">
+                </div>
+                <div class="w-full flex flex-col items-center justify-center gap-2">
+                    <h3 class="text-lg text-gray-200 font-bold tracking-tight">Введите alt для иконки:</h3>
+                    <input type="text" name="alt" id="alt" class="w-[90%] py-2 border border-gray-400 rounded-xl text-base text-gray-400 font-regular text-center" placeholder="Ссылка на иконку">
+                </div>
+                <div class="w-full flex flex-col items-center justify-center gap-2">
+                    <h3 class="text-lg text-gray-200 font-bold tracking-tight">Название товара:</h3>
+                    <input type="text" name="name" id="name" class="w-[90%] py-2 border border-gray-400 rounded-xl text-base text-gray-400 font-regular text-center" placeholder="Ссылка на иконку">
+                </div>
+                <div class="w-full flex flex-col items-center justify-center gap-2">
+                    <h3 class="text-lg text-gray-200 font-bold tracking-tight">Описание товара:</h3>
+                    <input type="text" name="description" id="description" class="w-[90%] py-2 border border-gray-400 rounded-xl text-base text-gray-400 font-regular text-center" placeholder="Ссылка на иконку">
+                </div>
+                <div class="w-full flex flex-col items-center justify-center gap-2">
+                    <h3 class="text-lg text-gray-200 font-bold tracking-tight">Цена товара:</h3>
+                    <input type="number" name="price" id="price" class="w-[90%] py-2 border border-gray-400 rounded-xl text-base text-gray-400 font-regular text-center" placeholder="Ссылка на иконку">
+                </div>
+                <button type="submit" id="addProductBtn" class="px-4 py-2 bg-blue-500 text-base text-white font-semibold rounded-xl w-[90%] tracking-tight transition active:scale-95">Добавить товар</button>
+            </div>
+        </section>
+    </main>
+
+    <script src="./js/headerbtns.js"></script>
+    <script src="./js/changesection.js"></script>
+    <script src="./js/createnewproduct.js"></script>
+
+    <script>
+        const user = tg.initDataUnsafe?.user;
+
+        if (user) {
+            document.getElementById('user-photo').src = user.photo_url || "https://via.placeholder.com/64";
+            document.getElementById('user-name').textContent = `${user.first_name || ""} ${user.last_name || ""}`;
+            document.getElementById('user-username').textContent = user.username ? "@" + user.username : "Без username";
+
+            (async () => {
+                try {
+                    const res = await fetch('http://localhost:3000/api/addUser', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify(user)
+                    });
+                    const data = await res.json();
+                    console.log("User saved:", data);
+                } catch (err) {
+                    console.error("Ошибка при сохранении пользователя:", err);
+                }
+            })();
+        }
+    </script>
+</body>
+</html>
