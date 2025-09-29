@@ -17,20 +17,24 @@
 
     <main class="h-screen p-4">
         <section class="h-full hidden" id="statistic">
-            <div class="flex flex-col gap-4 pb-20">
-                <!-- Панель профиля -->
-                <div class="grid grid-cols-[64px_auto] gap-4 items-center bg-zinc-800 p-4 rounded-xl">
-                    <img id="user-photo" src="" alt="avatar" class="w-16 h-16 rounded-full border border-zinc-700">
-                    <div class="flex flex-col">
-                        <h3 id="user-name" class="text-white font-bold text-xl"></h3>
-                        <p id="user-username" class="text-gray-400 text-sm"></p>
+            <div class="flex flex-col items-center gap-4 pb-20">
+                <h3 class="text-gray-200 text-3xl lg:text-3xl font-semibold tracking-tight">Статистика студии:</h3>
+                <div class="grid grid-cols-3 gap-4 items-center bg-zinc-800 p-4 rounded-xl">
+                    <div class="flex flex-col items-center justify-center gap-2">
+                        <i class="fa-solid fa-users text-gray-300 text-xl"></i>
+                        <h3 id="usersCount" class="text-white text-md font-semibold tracking-tight"></h3>
+                        <p class="text-gray-400 text-xs font-medium tracking-tight">Юзеров в студии</p>
                     </div>
-                </div>
-
-                <!-- Дополнительные блоки -->
-                <div class="bg-zinc-800 p-4 rounded-xl flex flex-col items-center">
-                    <h4 class="text-white font-semibold text-xl">Заказы:</h4>
-                    <div class="grid grid-cols-2 gap-4 mt-2" id="orders"></div>
+                    <div class="flex flex-col items-center justify-center gap-2">
+                        <i class="fa-solid fa-shopping-cart text-gray-300 text-xl"></i>
+                        <h3 id="ordersCount" class="text-white text-md font-semibold tracking-tight"></h3>
+                        <p class="text-gray-400 text-xs font-medium tracking-tight">Сделано заказов</p>
+                    </div>
+                    <div class="flex flex-col items-center justify-center gap-2">
+                        <i class="fa-solid fa-shopping-cart text-gray-300 text-xl"></i>
+                        <h3 id="productsCount" class="text-white text-md font-semibold tracking-tight"></h3>
+                        <p class="text-gray-400 text-xs font-medium tracking-tight">Товаров в студии</p>
+                    </div>
                 </div>
             </div>
         </section>
@@ -66,6 +70,7 @@
 
     <script src="./js/headerbtns.js"></script>
     <script src="./js/changesection.js"></script>
+    <script src="./js/getstatistic.js"></script>
     <script src="./js/createnewproduct.js"></script>
 
     <script>
