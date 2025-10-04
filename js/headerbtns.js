@@ -2,6 +2,7 @@ const hdsections = document.getElementById('hd-sections');
 
 const sections = [
     { name: 'Статистика', icon: 'fa-chart-simple', data: 'statistic' },
+    { name: 'Пользователи', icon: 'fa-users', data: 'users' },
     { name: 'Товары', icon: 'fa-cart-shopping', data: 'products' },
     { name: 'Создать товар', icon: 'fa-cart-plus', data: 'create' }
 ];

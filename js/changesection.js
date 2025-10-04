@@ -2,8 +2,9 @@ const pageSections = document.querySelectorAll('main section');
 const hdbtns = document.querySelectorAll('.hd-btns');
 
 function changesection(id) {
-    pageSections.forEach(section => section.classList.add('hidden'));
+    pageSections.forEach((section) => { section.classList.add('hidden'); section.classList.remove('active')});
     document.getElementById(id)?.classList.remove('hidden');
+    document.getElementById(id)?.classList.add('active');
 
     // сбрасываем цвет всем
     hdbtns.forEach(btn => {
@@ -16,9 +17,13 @@ function changesection(id) {
     activeBtn?.classList.remove('text-white');
     activeBtn?.classList.add('text-blue-600');
 
-    getUserCount();
-    getOrdersCount();
-    getProductsCount();
+    if (id === 'statistic') {
+        getUserCount();
+        getOrdersCount();
+        getProductsCount();
+    } else if (id === 'users') {
+        loadUsers();
+    }
 }
 
 hdbtns.forEach(btn => {

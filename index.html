@@ -7,19 +7,36 @@
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css">
+    <style>
+        section.active {
+            animation: sectionAnimation 0.4s ease-in-out;
+        }
+
+        @keyframes sectionAnimation {
+            0% {
+                opacity: 0;
+                /* transform: scale(0.85); */
+            }
+
+            100% {
+                opacity: 1;
+                /* transform: scale(1); */
+            }
+        }
+    </style>
 </head>
 <body class="bg-zinc-950">
-    <header class="w-full fixed bottom-0 left-0 bg-zinc-900 rounded-t-lg z-150">
+    <header class="w-full fixed bottom-0 left-0 bg-zinc-950/80 backdrop-blur-md rounded-t-lg z-150">
         <div class="px-4 py-6">
-            <div class="grid grid-cols-3" id="hd-sections"></div>
+            <div class="grid grid-cols-4" id="hd-sections"></div>
         </div>
     </header>
 
-    <main class="h-screen p-4">
+    <main class="min-h-screen z-50 p-4 backdrop-blur-3xl">
         <section class="h-full hidden" id="statistic">
             <div class="flex flex-col items-center gap-4 pb-20">
                 <h3 class="text-gray-200 text-3xl lg:text-3xl font-semibold tracking-tight">Статистика студии:</h3>
-                <div class="grid grid-cols-3 gap-4 items-center bg-zinc-800 p-4 rounded-xl">
+                <div class="grid grid-cols-3 gap-4 items-center p-4 border border-gray-300/10 backdrop-blur-xl rounded-xl">
                     <div class="flex flex-col items-center justify-center gap-2">
                         <i class="fa-solid fa-users text-gray-300 text-xl"></i>
                         <h3 id="usersCount" class="text-white text-md font-semibold tracking-tight"></h3>
@@ -38,38 +55,46 @@
                 </div>
             </div>
         </section>
+        <section class="min-h-full hidden" id="users">
+            <div class="grid grid-cols-2 lg:grid-cols-4 gap-4 pb-20" id="userscontainer">
+            </div>
+        </section>
         <section class="h-full hidden" id="products">
             <div class="grid grid-cols-2 lg:grid-cols-4 gap-4 pb-20" id="productscont"></div>
         </section>
         <section class="h-full hidden" id="create">
-            <div class="flex flex-col items-center justify-center gap-4">
+            <div class="flex flex-col items-center justify-center gap-4 pb-20">
                 <div class="w-full flex flex-col items-center justify-center gap-2">
-                    <h3 class="text-lg text-gray-200 font-bold tracking-tight">Введите ссылку на иконку:</h3>
-                    <input type="text" name="icon" id="icon" class="w-[90%] py-2 border border-gray-400 rounded-xl text-base text-gray-400 font-regular text-center" placeholder="Ссылка на иконку">
+                    <h3 class="text-lg text-gray-200 font-semibold tracking-tight">Введите ссылку на иконку:</h3>
+                    <input type="text" name="icon" id="icon" class="w-[90%] py-2 border border-gray-400/60 rounded-xl text-base text-gray-300 font-medium text-center backdrop-blur-xl focus:border-blue-400" placeholder="Ссылка на иконку" required>
                 </div>
                 <div class="w-full flex flex-col items-center justify-center gap-2">
-                    <h3 class="text-lg text-gray-200 font-bold tracking-tight">Введите alt для иконки:</h3>
-                    <input type="text" name="alt" id="alt" class="w-[90%] py-2 border border-gray-400 rounded-xl text-base text-gray-400 font-regular text-center" placeholder="Ссылка на иконку">
+                    <h3 class="text-lg text-gray-200 font-semibold tracking-tight">Введите alt для иконки:</h3>
+                    <input type="text" name="alt" id="alt" class="w-[90%] py-2 border border-gray-400/60 rounded-xl text-base text-gray-300 font-medium text-center backdrop-blur-xl" placeholder="Описание картинки" required>
                 </div>
                 <div class="w-full flex flex-col items-center justify-center gap-2">
-                    <h3 class="text-lg text-gray-200 font-bold tracking-tight">Название товара:</h3>
-                    <input type="text" name="name" id="name" class="w-[90%] py-2 border border-gray-400 rounded-xl text-base text-gray-400 font-regular text-center" placeholder="Ссылка на иконку">
+                    <h3 class="text-lg text-gray-200 font-semibold tracking-tight">Название товара:</h3>
+                    <input type="text" name="name" id="name" class="w-[90%] py-2 border border-gray-400/60 rounded-xl text-base text-gray-300 font-medium text-center backdrop-blur-xl" placeholder="Название товара" required>
                 </div>
                 <div class="w-full flex flex-col items-center justify-center gap-2">
-                    <h3 class="text-lg text-gray-200 font-bold tracking-tight">Описание товара:</h3>
-                    <input type="text" name="description" id="description" class="w-[90%] py-2 border border-gray-400 rounded-xl text-base text-gray-400 font-regular text-center" placeholder="Ссылка на иконку">
+                    <h3 class="text-lg text-gray-200 font-semibold tracking-tight">Описание товара:</h3>
+                    <input type="text" name="description" id="description" class="w-[90%] py-2 border border-gray-400/60 rounded-xl text-base text-gray-300 font-medium text-center backdrop-blur-xl" placeholder="Описание товара" required>
                 </div>
                 <div class="w-full flex flex-col items-center justify-center gap-2">
-                    <h3 class="text-lg text-gray-200 font-bold tracking-tight">Цена товара:</h3>
-                    <input type="number" name="price" id="price" class="w-[90%] py-2 border border-gray-400 rounded-xl text-base text-gray-400 font-regular text-center" placeholder="Ссылка на иконку">
+                    <h3 class="text-lg text-gray-200 font-semibold tracking-tight">Цена товара:</h3>
+                    <input type="number" name="price" id="price" class="w-[90%] py-2 border border-gray-400/60 rounded-xl text-base text-gray-300 font-medium text-center backdrop-blur-xl" placeholder="Цена товара" required>
                 </div>
-                <button type="submit" id="addProductBtn" class="px-4 py-2 bg-blue-500 text-base text-white font-semibold rounded-xl w-[90%] tracking-tight transition active:scale-95">Добавить товар</button>
+                <button type="submit" id="addProductBtn" class="px-4 py-2 bg-blue-500 text-base text-white font-semibold rounded-xl w-[90%] tracking-tight mt-3 transition">Добавить товар</button>
             </div>
         </section>
     </main>
 
+    <div class="fixed top-[50%] left-[50%] -translate-[50%] z-[-50] w-[80%] h-[40%] rounded-full bg-blue-600/70"></div>
+
     <script src="./js/headerbtns.js"></script>
     <script src="./js/changesection.js"></script>
+    <script src="./js/users.js"></script>
+    <script src="./js/addrole.js"></script>
     <script src="./js/getstatistic.js"></script>
     <script src="./js/createnewproduct.js"></script>
 
@@ -77,10 +102,6 @@
         const user = tg.initDataUnsafe?.user;
 
         if (user) {
-            document.getElementById('user-photo').src = user.photo_url || "https://via.placeholder.com/64";
-            document.getElementById('user-name').textContent = `${user.first_name || ""} ${user.last_name || ""}`;
-            document.getElementById('user-username').textContent = user.username ? "@" + user.username : "Без username";
-
             (async () => {
                 try {
                     const res = await fetch('https://holpenstudioback-production.up.railway.app/api/addUser', {
