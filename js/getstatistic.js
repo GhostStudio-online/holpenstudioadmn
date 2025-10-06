@@ -1,6 +1,6 @@
 async function getUserCount() {
     try {
-        const response = await fetch('https://holpenstudioback-production.up.railway.app/api/getUsers');
+        const response = await fetch('https://holpenstudioback-production.up.railway.app/api/users/get');
         if (response.ok) {
             const users = await response.json();
             const usersCount = users.length;
@@ -16,7 +16,7 @@ async function getUserCount() {
 
 async function getOrdersCount() {
     try {
-        const response = await fetch('https://holpenstudioback-production.up.railway.app/api/orders');
+        const response = await fetch('https://holpenstudioback-production.up.railway.app/api/orders/get');
         if (response.ok) {
             const orders = await response.json();
             const ordersCount = orders.length;
@@ -32,7 +32,7 @@ async function getOrdersCount() {
 
 async function getProductsCount() {
     try {
-        const response = await fetch('https://holpenstudioback-production.up.railway.app/api/products');
+        const response = await fetch('https://holpenstudioback-production.up.railway.app/api/products/get');
         if (response.ok) {
             const products = await response.json();
             const productsCount = products.length;
@@ -44,4 +44,5 @@ async function getProductsCount() {
         console.error('Ошибка при запросе:', error);
         document.getElementById('productsCount').innerHTML = 'Ошибка при загрузке данных.';
     }
+
 }
