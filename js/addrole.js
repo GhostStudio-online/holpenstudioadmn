@@ -6,7 +6,7 @@ function attachRoleHandlers() {
             const newRole = event.target.getAttribute('data-role');
 
             try {
-                const response = await fetch('https://holpenstudioback-production.up.railway.app/api/changeRole', {
+                const response = await fetch('https://holpenstudioback-production.up.railway.app/api/users/change/role', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({ id: userId, role: newRole }),
@@ -25,3 +25,4 @@ function attachRoleHandlers() {
         });
     });
 }
+
