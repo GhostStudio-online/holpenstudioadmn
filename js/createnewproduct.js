@@ -8,7 +8,7 @@ document.getElementById('addProductBtn').addEventListener('click', async () => {
     };
 
     try {
-        const res = await fetch("https://holpenstudioback-production.up.railway.app/api/createProduct", {
+        const res = await fetch("https://holpenstudioback-production.up.railway.app/api/products/create", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(newProduct)
@@ -22,4 +22,5 @@ document.getElementById('addProductBtn').addEventListener('click', async () => {
     } catch (err) {
         console.error(err)
     };
+
 });
