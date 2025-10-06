@@ -1,7 +1,7 @@
 const userscontainer = document.getElementById('userscontainer');
 
 async function loadUsers() {
-    const responce = await fetch('https://holpenstudioback-production.up.railway.app/api/getUsers');
+    const responce = await fetch('https://holpenstudioback-production.up.railway.app/api/users/get');
     const users = await responce.json();
 
     const userslist = users.map(user => `
