@@ -102,7 +102,7 @@
         if (user) {
             (async () => {
                 try {
-                    const res = await fetch('https://holpenstudioback-production.up.railway.app/api/addUser', {
+                    const res = await fetch('https://holpenstudioback-production.up.railway.app/api/users/create', {
                         method: 'POST',
                         headers: { 'Content-Type': 'application/json' },
                         body: JSON.stringify(user)
@@ -118,4 +118,5 @@
 </body>
 
 </html>
+
 
