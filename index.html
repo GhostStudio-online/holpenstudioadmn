@@ -12,14 +12,26 @@
             animation: sectionAnimation 0.4s ease-in-out;
         }
 
-        @keyframes sectionAnimation {
-            0% {
-                opacity: 0;
-            }
+        #popup {
+            position: fixed;
+            bottom: 14%;
+            right: 2%;
+            z-index: 500;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            background: rgba(39, 39, 42, 0.3);
+            backdrop-filter: blur(16px);
+            border-radius: 0.75rem;
+            padding: 1rem 1.25rem;
+            opacity: 0;
+            transform: translateY(30%);
+            transition: all 0.35s ease-in-out;
+            pointer-events: none;
+        }
 
-            100% {
-                opacity: 1;
-            }
+        #popup.show {
+            opacity: 1;
+            transform: translateY(0);
+            pointer-events: auto;
         }
     </style>
 </head>
@@ -61,31 +73,38 @@
             <div class="grid grid-cols-2 lg:grid-cols-4 gap-4 pb-20" id="productscont"></div>
         </section>
         <section class="h-full hidden" id="create">
-            <div class="flex flex-col items-center justify-center gap-4 pb-28">
+            <div class="flex flex-col items-center justify-center gap-4 pb-20">
                 <div class="w-full flex flex-col items-center justify-center gap-2">
                     <h3 class="text-lg text-gray-200 font-semibold tracking-tight">Введите ссылку на иконку:</h3>
-                    <input type="url" name="icon" id="icon" class="w-[90%] py-2 border border-gray-400/60 rounded-xl text-base text-gray-300 font-medium text-center backdrop-blur-xl focus:shadow-lg focus:shadow-blue-600" placeholder="Ссылка на иконку" required>
+                    <input type="text" name="icon" id="icon" class="w-[90%] py-2 border border-gray-400/60 rounded-xl text-base text-gray-300 font-medium text-center backdrop-blur-xl focus:border-blue-400" placeholder="Ссылка на иконку" required>
                 </div>
                 <div class="w-full flex flex-col items-center justify-center gap-2">
                     <h3 class="text-lg text-gray-200 font-semibold tracking-tight">Введите alt для иконки:</h3>
-                    <input type="text" name="alt" id="alt" class="w-[90%] py-2 border border-gray-400/60 rounded-xl text-base text-gray-300 font-medium text-center backdrop-blur-xl focus:shadow-lg focus:shadow-blue-600" placeholder="Описание картинки" required>
+                    <input type="text" name="alt" id="alt" class="w-[90%] py-2 border border-gray-400/60 rounded-xl text-base text-gray-300 font-medium text-center backdrop-blur-xl" placeholder="Описание картинки" required>
                 </div>
                 <div class="w-full flex flex-col items-center justify-center gap-2">
                     <h3 class="text-lg text-gray-200 font-semibold tracking-tight">Название товара:</h3>
-                    <input type="text" name="name" id="name" class="w-[90%] py-2 border border-gray-400/60 rounded-xl text-base text-gray-300 font-medium text-center backdrop-blur-xl focus:shadow-lg focus:shadow-blue-600" placeholder="Название товара" required>
+                    <input type="text" name="name" id="name" class="w-[90%] py-2 border border-gray-400/60 rounded-xl text-base text-gray-300 font-medium text-center backdrop-blur-xl" placeholder="Название товара" required>
                 </div>
                 <div class="w-full flex flex-col items-center justify-center gap-2">
                     <h3 class="text-lg text-gray-200 font-semibold tracking-tight">Описание товара:</h3>
-                    <input type="text" name="description" id="description" class="w-[90%] py-2 border border-gray-400/60 rounded-xl text-base text-gray-300 font-medium text-center backdrop-blur-xl focus:shadow-lg focus:shadow-blue-600" placeholder="Описание товара" required>
+                    <input type="text" name="description" id="description" class="w-[90%] py-2 border border-gray-400/60 rounded-xl text-base text-gray-300 font-medium text-center backdrop-blur-xl" placeholder="Описание товара" required>
                 </div>
                 <div class="w-full flex flex-col items-center justify-center gap-2">
                     <h3 class="text-lg text-gray-200 font-semibold tracking-tight">Цена товара:</h3>
-                    <input type="number" name="price" id="price" class="w-[90%] py-2 border border-gray-400/60 rounded-xl text-base text-gray-300 font-medium text-center backdrop-blur-xl focus:shadow-lg focus:shadow-blue-600" placeholder="Цена товара" required>
+                    <input type="number" name="price" id="price" class="w-[90%] py-2 border border-gray-400/60 rounded-xl text-base text-gray-300 font-medium text-center backdrop-blur-xl" placeholder="Цена товара" required>
                 </div>
                 <button type="submit" id="addProductBtn" class="px-4 py-2 bg-blue-500 text-base text-white font-semibold rounded-xl w-[90%] tracking-tight mt-3 transition">Добавить товар</button>
             </div>
         </section>
     </main>
+
+    <div class="fixed bottom-[14%] right-[2%] z-500 border border-gray-300/10 bg-zinc-700/30 backdrop-blur-xl rounded-xl tracking-tight" id="popup">
+        <div class="py-4 px-2">
+            <!-- text-gray-100 text-red-300 -->
+            <h3 class="text-red-300 text-sm font-semibold"></h3>
+        </div>
+    </div>
 
     <div class="fixed top-[50%] left-[50%] -translate-[50%] z-[-50] w-[80%] h-[40%] rounded-full bg-blue-600/70"></div>
 
@@ -116,7 +135,4 @@
         }
     </script>
 </body>
-
 </html>
-
-
